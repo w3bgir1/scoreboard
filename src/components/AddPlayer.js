@@ -12,7 +12,11 @@ export default class AddPlayer extends Component {
 
     handleSubmit = (event) => {
         event.preventDefault()
+        if (this.state.name.length < 2) return alert('Input correct name')
         this.props.addPlayer(this.state.name)
+        this.setState({ 
+            name: '' 
+        })
     }
 
     handleChange = (event) => {
@@ -21,22 +25,24 @@ export default class AddPlayer extends Component {
         })
     }
 
+
     render() {
         return (
-        <div className="add-player">
-            <form onSubmit={this.handleSubmit}>
-            <label>
-                Name:
-                <input
-              type="text"
-              name="name"
-              onChange={this.handleChange}
-              value={this.state.name}
-            />
-            </label>
-            <input type="submit" value="Add" />
-            </form>
-        </div>
+            <div className="add-player">
+                <form onSubmit={this.handleSubmit}>
+                    <label>
+                        Name:
+                        <input
+                            type="text"
+                            name="name"
+                            id="nameForm"
+                            onChange={this.handleChange}
+                            value={this.state.name}
+                        />
+                    </label>
+                    <input type="submit" value="Add" />
+                </form>
+            </div>
     )
   }
 }
