@@ -53,6 +53,17 @@ export default class Scoreboard extends Component {
         />
       )
     }
+
+    addPlayer = (name) => {
+        const player = {
+          id: Math.round(Math.random()*100000),
+          name,
+          score: 0
+        }
+        this.setState({
+          players: this.state.players.concat(player)
+        })
+    }
   
     render() {
       return (
@@ -65,7 +76,7 @@ export default class Scoreboard extends Component {
                 .map(this.renderPlayer)
             }
           </ul>
-          <AddPlayer />
+          <AddPlayer addPlayer={this.addPlayer} />
         </div>
       )
     }

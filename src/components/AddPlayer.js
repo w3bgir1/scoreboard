@@ -1,10 +1,24 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import './AddPlayer.css'
 
 export default class AddPlayer extends Component {
 
-    handleSubmit(event) {
+    state = {name: ''}
+
+    static propTypes = {
+        addPlayer: PropTypes.func.isRequired
+    }
+
+    handleSubmit = (event) => {
         event.preventDefault()
-        console.log('Submitting form...')
+        this.props.addPlayer(this.state.name)
+    }
+
+    handleChange = (event) => {
+        this.setState({
+          [event.target.name]: event.target.value
+        })
     }
 
     render() {
@@ -13,7 +27,12 @@ export default class AddPlayer extends Component {
             <form onSubmit={this.handleSubmit}>
             <label>
                 Name:
-                <input type="text" name="name" />
+                <input
+              type="text"
+              name="name"
+              onChange={this.handleChange}
+              value={this.state.name}
+            />
             </label>
             <input type="submit" value="Add" />
             </form>
